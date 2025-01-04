@@ -1,39 +1,19 @@
-(function () {
-  const attachObserver = () => {
-    const player = document.querySelector('ytd-player');
-
-    if (!player) {
-      console.log('YouTube player not found.');
-      return;
+// Listen for changes in the YouTube video player
+const observer = new MutationObserver(() => {
+    const video = document.querySelector("video");
+    if (video) {
+      const isAd = document.querySelector('.ad-showing'); // Check if an ad is playing
+      if (isAd) {
+        video.playbackRate = 12; // Speed up during the ad
+      } else {
+        video.playbackRate = 1; // Reset speed for regular content
+      }
     }
-
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          const isAdShowing = player.classList.contains('ad-showing');
-          const adOverlay = document.querySelector('.ytp-ad-player-overlay');
-
-          if (isAdShowing || adOverlay) {
-            alert('An ad is currently playing.');
-          } else {
-            console.log('Ad has ended or not playing.');
-          }
-        }
-      });
-    });
-
-    observer.observe(player, { attributes: true });
-    console.log('Observer attached to YouTube player.');
-  };
-
-  const initObserver = () => {
-    const bodyObserver = new MutationObserver(() => {
-      attachObserver();
-    });
-
-    bodyObserver.observe(document.body, { childList: true, subtree: true });
-    console.log('Body observer initialized.');
-  };
-
-  initObserver();
-})();
+  });
+  
+  // Observe the DOM for changes in the video player container
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+  
