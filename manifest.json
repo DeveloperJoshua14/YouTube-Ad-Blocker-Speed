@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "YouTube Video Time Viewer",
+    "version": "1.1",
+    "description": "View the current time and total duration of the video and detect ads.",
+    "permissions": [],
+    "host_permissions": ["https://www.youtube.com/*"],
+    "content_scripts": [
+        {
+        "matches": ["https://www.youtube.com/*"],
+        "js": ["content.js"]
+        }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icon.png"
+    },
+    "icons": {
+      "48": "icon.png"
+    }
+  }
+  

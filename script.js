@@ -1,0 +1,1 @@
+javascript:(function(){var video = document.getElementsByTagName("video")[0];video.playbackRate = parseFloat(12) || 1;})();
