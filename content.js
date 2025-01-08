@@ -4,6 +4,7 @@ var VideoSpeed;
 const observer = new MutationObserver(() => {
   const video = document.querySelector("video");
   if (video) {
+    console.log("-* Current Video Speed: ", VideoSpeed)
     const isAd = document.querySelector('.ad-showing'); // Check if an ad is playing
     
     if (!isAd) {
