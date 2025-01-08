@@ -4,11 +4,23 @@ var VideoSpeed = -2;
 // Listen for changes in the YouTube video player
 const observer = new MutationObserver(() => {
   const video = document.querySelector("video");
+  console.log("Location 1: ");
+  console.log("video.playbackRate: ", video.playbackRate);
+  console.log("oldVideoSpeed: ", oldVideoSpeed);
+  console.log("VideoSpeed: ", VideoSpeed);
   oldVideoSpeed = VideoSpeed;
   VideoSpeed = video.playbackRate;
+  console.log("Location 2: ");
+  console.log("oldVideoSpeed: ", oldVideoSpeed);
+  console.log("VideoSpeed: ", VideoSpeed);
   if (oldVideoSpeed == -2){
     oldVideoSpeed = VideoSpeed;
   }
+  console.log("Location 3: ");
+  console.log("video.playbackRate: ", video.playbackRate);
+  console.log("oldVideoSpeed: ", oldVideoSpeed);
+  console.log("VideoSpeed: ", VideoSpeed);
+
   if (video) {
     const isAd = document.querySelector('.ad-showing'); // Check if an ad is playing
     if (isAd) {
