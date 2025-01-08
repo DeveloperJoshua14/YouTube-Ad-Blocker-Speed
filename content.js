@@ -14,6 +14,7 @@ const observer = new MutationObserver(() => {
     
     if (isAd) {
       const delay = Math.random() * 0.5 + 0.5; // Random number between 0.5 and 1
+      backFromAd = true
 
       // Set a timeout before speeding up the ad
       setTimeout(() => {
