@@ -1,4 +1,5 @@
 var VideoSpeed;
+var backFromAd = true;
 
 // Listen for changes in the YouTube video player
 const observer = new MutationObserver(() => {
@@ -7,7 +8,7 @@ const observer = new MutationObserver(() => {
     console.log("-* Current Video Speed: ", VideoSpeed)
     const isAd = document.querySelector('.ad-showing'); // Check if an ad is playing
     
-    if (!isAd) {
+    if (!isAd && !backFromAd) {
       VideoSpeed = video.playbackRate;
     }
     
@@ -20,6 +21,7 @@ const observer = new MutationObserver(() => {
       }, delay * 1000);
     } else {
       video.playbackRate = VideoSpeed; // Reset speed for regular content
+      backFromAd = false;
     }
   }
 });
