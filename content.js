@@ -1,4 +1,4 @@
-var VideoSpeed;
+var VideoSpeed = 1;
 var backFromAd = true;
 
 // Listen for changes in the YouTube video player
@@ -20,7 +20,9 @@ const observer = new MutationObserver(() => {
         video.playbackRate = 10; // Speed up during the ad
       }, delay * 1000);
     } else {
-      video.playbackRate = VideoSpeed; // Reset speed for regular content
+      if (!backFromAd){
+        video.playbackRate = parseFloat(VideoSpeed.toFixed(2)); // Reset speed for regular content
+      }
       backFromAd = false;
     }
   }
