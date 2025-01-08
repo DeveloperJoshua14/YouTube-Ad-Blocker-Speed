@@ -1,5 +1,5 @@
 var oldVideoSpeed;
-var VideoSpeed = 1;
+var VideoSpeed = document.querySelector("video").playbackRate;
 
 // Listen for changes in the YouTube video player
 const observer = new MutationObserver(() => {
