@@ -1,6 +1,11 @@
+var oldVideoSpeed;
+var VideoSpeed = video.playbackRate;
+
 // Listen for changes in the YouTube video player
 const observer = new MutationObserver(() => {
   const video = document.querySelector("video");
+  oldVideoSpeed = VideoSpeed;
+  VideoSpeed = video.playbackRate;
   if (video) {
     const isAd = document.querySelector('.ad-showing'); // Check if an ad is playing
     if (isAd) {
@@ -10,6 +15,8 @@ const observer = new MutationObserver(() => {
       setTimeout(() => {
         video.playbackRate = 10; // Speed up during the ad
       }, delay * 1000);
+    } else {
+      video.playbackRate = oldVideoSpeed; // Reset speed for regular content
     }
   }
 });
