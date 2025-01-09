@@ -12,10 +12,7 @@ const observer = new MutationObserver(() => {
     if (isAd) {
       // Ad is playing
       var delay;
-      if (startingAd){
-        delay = Math.random() * 0.5 + 0.5 + 2; // Random delay between 2.5 and 3 second (Bypass "Using Ad Block" banner)
-        startingAd = false;
-      } else {
+      if (!startingAd){
         delay = Math.random() * 0.5 + 0.5; // Random delay between 0.5 and 1 second
       }
       backFromAd = 0; // Reset backFromAd counter
@@ -23,6 +20,8 @@ const observer = new MutationObserver(() => {
         video.playbackRate = 10; // Speed up during the ad
       }, delay * 1000);
     } else {
+      startingAd = false;
+      console.log("--* SET TO FALSE!!!")
       // Regular content is playing
       if (backFromAd === 0) {
         // First frame after returning from an ad, restore the saved speed
