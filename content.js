@@ -1,5 +1,6 @@
 var VideoSpeed = 1; // Default playback speed
 var backFromAd = 0;
+var startingAd = true;
 
 // Listen for changes in the YouTube video player
 const observer = new MutationObserver(() => {
@@ -10,7 +11,13 @@ const observer = new MutationObserver(() => {
 
     if (isAd) {
       // Ad is playing
-      const delay = Math.random() * 0.5 + 0.5; // Random delay between 0.5 and 1 second
+      var delay;
+      if (startingAd){
+        delay = Math.random() * 0.5 + 0.5 + 2; // Random delay between 2.5 and 3 second (Bypass "Using Ad Block" banner)
+        startingAd = false;
+      } else {
+        delay = Math.random() * 0.5 + 0.5; // Random delay between 0.5 and 1 second
+      }
       backFromAd = 0; // Reset backFromAd counter
       setTimeout(() => {
         video.playbackRate = 10; // Speed up during the ad

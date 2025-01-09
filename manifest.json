@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "YouTube Ad Speed Up",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "description": "Speeds up YouTube ads by increasing the playback rate.",
     "permissions": [
       "scripting",
