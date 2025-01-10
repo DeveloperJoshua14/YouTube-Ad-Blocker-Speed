@@ -8,7 +8,7 @@ var currentTimeInVideo = 0;
 var adSpeedSet = false;
 var firstLoad = true;
 var urlCode = window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1);
-console.warn("== RESET ):");
+// console.warn("== RESET ):");
 
 // Listen for changes in the YouTube video player
 const observer = new MutationObserver(() => {
@@ -18,11 +18,11 @@ const observer = new MutationObserver(() => {
     // setTimeout(() => {}, 500);
 
     if ((window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1) != urlCode) || firstLoad){
-      console.warn("=*f firstLoad    : ", firstLoad);
-      console.warn("=*S startingAd   : ", startingAd);
-      console.warn("=*R playbackRate : ", video.playbackRate);
-      console.warn("=*O oldUrlCode   : ", urlCode);
-      console.warn("=*N newUrlCode   : ", window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1));
+      // console.warn("=*f firstLoad    : ", firstLoad);
+      // console.warn("=*S startingAd   : ", startingAd);
+      // console.warn("=*R playbackRate : ", video.playbackRate);
+      // console.warn("=*O oldUrlCode   : ", urlCode);
+      // console.warn("=*N newUrlCode   : ", window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1));
       firstLoad = false;
       startingAd = true;
       video.playbackRate = UserSpeed;
@@ -34,10 +34,10 @@ const observer = new MutationObserver(() => {
       currentTimeInVideo = video.currentTime;
     }
 
-    console.warn("=U UserSpeed    : ", UserSpeed);
-    console.warn("=s startingAd   : ", startingAd);
-    console.warn("=R playbackRate : ", video.playbackRate);
-    console.warn("=a isAd         : ", isAd != null);
+    // console.warn("=U UserSpeed    : ", UserSpeed);
+    // console.warn("=s startingAd   : ", startingAd);
+    // console.warn("=R playbackRate : ", video.playbackRate);
+    // console.warn("=a isAd         : ", isAd != null);
 
     if (isAd) {
 
