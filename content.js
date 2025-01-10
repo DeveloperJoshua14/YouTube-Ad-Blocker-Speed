@@ -18,6 +18,7 @@ const observer = new MutationObserver(() => {
 
     if (window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1) != urlCode){
       startingAd = true;
+      video.playbackRate = UserSpeed;
       urlCode = window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1);
     }
     const isAd = document.querySelector('.ad-showing'); // Check if an ad is playing
