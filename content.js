@@ -1,4 +1,4 @@
-var UserSpeed = 1;         // Defualt Video Speed *Changes*
+var UserSpeed = 3;         // Defualt Video Speed *Changes*
 const adSpeed = 10;      // Amount Multiplied
 const adDelay = 0.5;       // Second(s) till ad FF's (Always +/- 0.25 seconds)
 const StartingAdDelay = 2; // Extra second(s) till the first ad FF's
@@ -6,6 +6,7 @@ var startingAd = true;     // Is this a starting ad
 var wasJustAd = false;
 var currentTimeInVideo = 0;
 var adSpeedSet = false;
+var firstLoad = true;
 var urlCode = window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1);
 console.warn("== RESET ):");
 
@@ -16,7 +17,13 @@ const observer = new MutationObserver(() => {
   if (video) {
     // setTimeout(() => {}, 500);
 
-    if (window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1) != urlCode){
+    if ((window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1) != urlCode) || firstLoad){
+      console.warn("=*f firstLoad    : ", firstLoad);
+      console.warn("=*S startingAd   : ", startingAd);
+      console.warn("=*R playbackRate : ", video.playbackRate);
+      console.warn("=*O oldUrlCode   : ", urlCode);
+      console.warn("=*N newUrlCode   : ", window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1));
+      firstLoad = false;
       startingAd = true;
       video.playbackRate = UserSpeed;
       urlCode = window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1);
