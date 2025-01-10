@@ -10,6 +10,9 @@ const observer = new MutationObserver(() => {
   const video = document.querySelector("video");
   if (video) {
     // setTimeout(() => {}, 500);
+    console.warn("== UserSpeed    : ", UserSpeed);
+    console.warn("== startingAd   : ", startingAd);
+    console.warn("== playbackRate : ", video.playbackRate);
 
     if (window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1) != urlCode){
       startingAd = true;
@@ -35,6 +38,8 @@ const observer = new MutationObserver(() => {
 
       if (video.playbackRate == adSpeed){
         video.playbackRate = UserSpeed;
+      } else {
+        UserSpeed = video.playbackRate;
       }
 
       startingAd = false;
