@@ -3,6 +3,7 @@ const adSpeed = 10;      // Amount Multiplied
 const adDelay = 0.5;       // Second(s) till ad FF's (Always +/- 0.25 seconds)
 const StartingAdDelay = 2; // Extra second(s) till the first ad FF's
 var startingAd = true;     // Is this a starting ad
+var wasJustAd = false;
 var urlCode = window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1);
 console.warn("== RESET ):");
 
@@ -24,6 +25,7 @@ const observer = new MutationObserver(() => {
     console.warn("=a isAd         : ", isAd != null);
 
     if (isAd) {
+      wasJustAd = true;
 
       // if (video.playbackRate != adSpeed){
       //   UserSpeed = video.playbackRate;
@@ -39,8 +41,9 @@ const observer = new MutationObserver(() => {
       }, delay * 1000);
     } else {
 
-      if (video.playbackRate != UserSpeed){
+      if (wasJustAd){
         video.playbackRate = UserSpeed;
+        wasJustAd = false;
       } else {
         UserSpeed = video.playbackRate;
       }
