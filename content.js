@@ -5,6 +5,7 @@ const StartingAdDelay = 2; // Extra second(s) till the first ad FF's
 var startingAd = true;     // Is this a starting ad
 var wasJustAd = false;
 var currentTimeInVideo = 0;
+var adSpeedSet = false;
 var urlCode = window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1);
 console.warn("== RESET ):");
 
@@ -44,9 +45,13 @@ const observer = new MutationObserver(() => {
       if (startingAd){
         delay = delay + StartingAdDelay; // Random delay between 0.5 and 1 second; // Random delay between 2.5 and 3 second (Bypass "Using Ad Block" banner)
       }
-      setTimeout(() => {
-        video.playbackRate = 10; // Speed up during the ad
-      }, delay * 1000);
+      if (!adSpeedSet){
+        adSpeedSet = true;
+        setTimeout(() => {
+          video.playbackRate = 10; // Speed up during the ad
+        }, delay * 1000);
+      }
+      
     } else {
 
       if (wasJustAd){
@@ -56,6 +61,7 @@ const observer = new MutationObserver(() => {
         UserSpeed = video.playbackRate;
       }
 
+      adSpeedSet = false;
       startingAd = false;
 
     }
