@@ -1,36 +1,44 @@
-var VideoSpeed = 1; // Default playback speed
-var backFromAd = 0;
-var startingAd = true;
+var UserSpeed = 1;         // Defualt Video Speed *Changes*
+const adSpeed = 10.1;      // Amount Multiplied
+const adDelay = 0.5;       // Second(s) till ad FF's (Always +/- 0.25 seconds)
+const StartingAdDelay = 2; // Extra second(s) till the first ad FF's
+var startingAd = true;     // Is this a starting ad
+var urlCode = window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1);
 
 // Listen for changes in the YouTube video player
 const observer = new MutationObserver(() => {
   const video = document.querySelector("video");
   if (video) {
-    console.log("-* Current Video Speed: ", VideoSpeed);
+    // setTimeout(() => {}, 500);
+
+    if (window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1) != urlCode){
+      startingAd = true;
+      urlCode = window.location.href.substring(10).substring(window.location.href.substring(10).indexOf('/')+1);
+    }
     const isAd = document.querySelector('.ad-showing'); // Check if an ad is playing
 
     if (isAd) {
-      // Ad is playing
-      var delay;
-      if (!startingAd){
-        delay = Math.random() * 0.5 + 0.5; // Random delay between 0.5 and 1 second
+
+      if (video.playbackRate != adSpeed){
+        UserSpeed = video.playbackRate;
       }
-      backFromAd = 0; // Reset backFromAd counter
+
+      // Ad is playing
+      var delay = adDelay + Math.random() * 0.5 + 0.25;
+      if (startingAd){
+        delay = delay + StartingAdDelay; // Random delay between 0.5 and 1 second; // Random delay between 2.5 and 3 second (Bypass "Using Ad Block" banner)
+      }
       setTimeout(() => {
         video.playbackRate = 10; // Speed up during the ad
       }, delay * 1000);
     } else {
-      startingAd = false;
-      console.log("--* SET TO FALSE!!!")
-      // Regular content is playing
-      if (backFromAd === 0) {
-        // First frame after returning from an ad, restore the saved speed
-        video.playbackRate = VideoSpeed;
-      } else {
-        // Save the current speed if it's not already saved
-        VideoSpeed = video.playbackRate;
+
+      if (video.playbackRate == adSpeed){
+        video.playbackRate = UserSpeed;
       }
-      backFromAd++;
+
+      startingAd = false;
+
     }
   }
 });
